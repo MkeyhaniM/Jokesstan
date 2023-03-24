@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&family=Holtwood+One+SC&family=Josefin+Sans&family=Paytone+One&family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+section#main {
+  background-image: url("../img/backroundMainPage.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+section#main div#introduction {
+  width: 100%;
+  margin-top: 142.8571428571px;
+  padding: 3rem;
+  background-color: rgba(209, 194, 209, 0.5);
+  border-radius: 17px;
+  display: inline-block;
+  border: 2px solid #f1e9e9;
+  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.39);
+}
+
+div.MuiStack-root > button {
+  font-family: "Paytone One";
+}
+
+.T-heading {
+  font-family: "Russo One", sans-serif !important;
+  margin: 30px 10px !important;
+}
+
+.IntroHeading {
+  margin: 170px 0 40px 20px;
+}
+
+.buttonsMarginTop {
+  position: absolute;
+  bottom: 40px;
+  right: 50px;
+}
+
+/*# sourceMappingURL=mainpage.css.map */
