@@ -15,3 +15,8 @@
         <li>Axios</li>
     </ul>
 </div>
+
+<div>
+    <h3>Looking around Jokestan</h3>
+    <img src="jokestan/src/assets/img/introdutingJokestan.PNG" alt="introdutingJokestan">
+</div>
