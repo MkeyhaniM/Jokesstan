@@ -1,4 +1,4 @@
-# Jokesstan
+# Jokestan
 
 <i>
     Created by Create-react-app    
