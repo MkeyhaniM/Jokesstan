@@ -3,7 +3,7 @@ import {styled} from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import {purple} from '@mui/material/colors';
-
+import {A} from 'hookrouter';
 
 const BootstrapButton = styled(Button)({
     textTransform: 'none',
@@ -52,9 +52,13 @@ const ColorButton = styled(Button)(({theme}) => ({
 }));
 
 export function CustomizedButtons() {
+    function app() {
+        <A/>
+    }
+
     return (
         <Stack spacing={2} direction="row">
-            <ColorButton variant="contained">Get started</ColorButton>
+            <ColorButton onClick={app} variant="contained">Get started</ColorButton>
             <BootstrapButton variant="contained" disableRipple>Sign in</BootstrapButton>
         </Stack>
     );
