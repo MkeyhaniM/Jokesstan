@@ -3,7 +3,7 @@ import {styled} from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import {purple} from '@mui/material/colors';
-import {A} from 'hookrouter';
+import {Link} from "react-router-dom";
 
 const BootstrapButton = styled(Button)({
     textTransform: 'none',
@@ -52,14 +52,11 @@ const ColorButton = styled(Button)(({theme}) => ({
 }));
 
 export function CustomizedButtons() {
-    function app() {
-        <A/>
-    }
 
     return (
         <Stack spacing={2} direction="row">
-            <ColorButton onClick={app} variant="contained">Get started</ColorButton>
-            <BootstrapButton variant="contained" disableRipple>Sign in</BootstrapButton>
+            <ColorButton variant="contained"><Link style={{textDecoration:"none",color:"white"}} to='/start'> Get started</Link> </ColorButton>
+            <BootstrapButton variant="contained" disableRipple> <Link style={{textDecoration:"none",color:"white"}} to='/sign'>Sign in</Link></BootstrapButton>
         </Stack>
     );
 }
