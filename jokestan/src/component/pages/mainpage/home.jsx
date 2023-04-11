@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import {Introduction} from "./Introduction";
 
-export function Mainpage() {
+export function Home() {
     return (
         <section id='main'>
             <CssBaseline/>
