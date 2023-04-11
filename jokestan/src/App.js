@@ -1,6 +1,7 @@
-import {Mainpage} from "./component/pages/mainpage/mainpage";
-export function App() {
-  return (
-      <Mainpage/>
-  );
+import {RouterJokestan} from "./component/router/router";
+
+export default function App() {
+    return (
+        <RouterJokestan />
+    );
 }
