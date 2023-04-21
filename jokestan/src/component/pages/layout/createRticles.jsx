@@ -11,7 +11,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const useStyle = makeStyles({
   buttonOptions: {
-
     padding: "40px",
   },
 });
