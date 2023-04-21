@@ -13,7 +13,8 @@
     <ul>
         <li>Material-Ui</li>
         <li>Axios</li>
-        <li>hookrouter</li>
+        <li>React-router-dom</li>
+        <li>Json-server</li>
     </ul>
 </div>
 
