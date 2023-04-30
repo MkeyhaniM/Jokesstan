@@ -6,8 +6,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ContentCopyRounded from "@mui/icons-material/ContentCopyRounded";
 import CopyRate from "@mui/icons-material/StarRateRounded";
 import Typography from "@mui/material/Typography";
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import  addFavour  from "./addFavour";
 
 const useStyle = makeStyles({
   buttonOptions: {
@@ -17,19 +21,27 @@ const useStyle = makeStyles({
 
 const theme = createTheme({
   typography: {
-    fontFamily: ["Kanit", "serif"].join(","),
+    fontFamily: ["Ubuntu", "serif"].join(","),
   },
 });
 
-export default function CreateRticles() {
+const theme2 = createTheme({
+  typography: {
+    fontFamily: ["Acme", "serif"].join(","),
+    fontSize: 17,
+  },
+});
+
+export default function CreateRticles({ sentence, type }) {
   const classes = useStyle();
   return (
     <Box
       sx={{
         "& > :not(style)": { m: 1 },
         maxWidth: 900,
-        border: 3,
-        boxShadow: "16px 19px 13px -3px rgba(0,0,0,0.1)",
+        border: 2,
+        borderColor: "#E384FF",
+        boxShadow: "4px 4px 10px 0 #FFA3FD",
         borderRadius: 3,
         margin: "5rem auto",
       }}
@@ -37,26 +49,66 @@ export default function CreateRticles() {
       <Box>
         <Box className={classes.buttonOptions}>
           <ThemeProvider theme={theme}>
-            <Typography align="left">
-              palette color objects are provided, they will replace the default
-              onesThe palette color value can either be a color object, or an
-              object with one or more of the keys specified by the following
-              TypeScript interface
+            <Typography color={"snow"} fontSize={20} align="left">
+              {sentence}
             </Typography>
           </ThemeProvider>
         </Box>
-        <Fab margin={5} aria-label="like" variant="extended">
-          <FavoriteIcon sx={{ mr: 1 }} fontSize="large" />
-          Favorite
-        </Fab>
-        <Fab margin={2} aria-label="like" variant="extended">
-          <ContentCopyRounded sx={{ mr: 1 }} fontSize="large" />
-          CopyIcon
-        </Fab>
-        <Fab margin={2} aria-label="like" variant="extended">
-          <CopyRate sx={{ mr: 1 }} color="warning1" fontSize="large" />
-          Rate
-        </Fab>
+        <Box
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"space-around"}
+        >
+          <Box display={"flex"}>
+            <Box marginX={1}>
+              <ThemeProvider theme={theme2}>
+                <Fab
+                  aria-label="like"
+                  variant="extended"
+                  color="default"
+                  onClick={() => addFavour(sentence, type)}
+                >
+                  <FavoriteIcon
+                    sx={{ mr: 1 }}
+                    fontSize="medium"
+                    color="error"
+                  />
+                  Favorite
+                </Fab>
+              </ThemeProvider>
+            </Box>
+            <Box marginX={1}>
+              <ThemeProvider theme={theme2}>
+                <Fab aria-label="like" variant="extended" color="default">
+                  <ContentCopyRounded
+                    sx={{ mr: 1 }}
+                    fontSize="medium"
+                    color="info"
+                  />
+                  Copy
+                </Fab>
+              </ThemeProvider>
+            </Box>
+            <Box marginX={1}>
+              <ThemeProvider theme={theme2}>
+                <Fab aria-label="like" variant="extended" color="default">
+                  <CopyRate sx={{ mr: 1 }} fontSize="medium" color="warning" />
+                  Rate
+                </Fab>
+              </ThemeProvider>
+            </Box>
+          </Box>
+          <Box alignItems={"end"}>
+            <Stack direction="row" spacing={1} marginY={2}>
+              <Chip
+                icon={<FormatQuoteIcon />}
+                label={type}
+                color="primary"
+                variant="filled"
+              />
+            </Stack>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
