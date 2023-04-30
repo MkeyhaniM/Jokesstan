@@ -1,33 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CreateRticles from "./createRticles";
 import Container from "@mui/material/Container";
 import request from "../../ax-jok/Ax-jokestan";
-
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+import LinearProgress from '@mui/material/LinearProgress';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 export default function Loop() {
-  const [state, setState] = useState([]);
-  console.log(state);
+  const [state, setState] = useState(false);
 
-  useEffect(() => {
-    request().then((response) => {
-      // setState(response.data);
-    });
-
-    return () => {
-      function Looping() {
-        return arr.map((e, index) => {
-          return <CreateRticles key={e + index} />;
-        });
+  request()
+    .then((req) => {
+      if (!state) {
+        setState(req);
       }
-    };
-  }, [state, request()]);
-
-  function Looping() {
-    return arr.map((e, index) => {
-      return <CreateRticles key={e + index} />;
+    })
+    .catch((error) => {
+      setState(false);
     });
+
+  function HandelSentence() {
+    if (state) {
+      return Object.keys(state).map((key) => {
+        return state[key].map((ce, index) => {
+          return <CreateRticles sentence={ce} key={index + ce} type={key} />;
+        });
+      });
+    }
   }
 
-  return <Container>{/* <Looping/> */}</Container>;
+  function Loading() {
+    return (
+      <Box >
+        <Typography color={'whitesmoke'} variant="h2">Loading</Typography>
+        <LinearProgress color="secondary" />
+      </Box>
+    );
+  }
+
+  return (
+    <Container>
+      {state && <HandelSentence />}
+      {!state && <Loading />}
+    </Container>
+  );
 }
