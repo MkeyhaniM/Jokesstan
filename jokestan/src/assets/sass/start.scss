@@ -1,11 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 #VhHeight {
- height: 100vh !important;
+  height: 100vh !important;
 }
 
 #mAuto {
   margin: 0 auto;
+}
+
+#favouriteList {
+  position: absolute;
+  bottom: 0;
 }
