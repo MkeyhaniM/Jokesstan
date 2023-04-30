@@ -1,18 +1,27 @@
 import * as React from "react";
-import {
-  createTheme,
-  responsiveFontSizes,
-  ThemeProvider,
-} from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import CheckUser from "./checkUser";
+import Box from "@mui/material/Box";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Badge from "@mui/material/Badge";
+import { purple } from "@mui/material/colors";
+
+const newThme = createTheme({
+  typography: {
+    fontFamily: "Acme",
+  },
+});
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -86,9 +95,7 @@ export default function Subjects() {
     return type.map((e, index) => {
       return (
         <ListItem key={`${e}-${index}`} button>
-          {/* <ListItemText primary={e} /> */}
-          <Typography
-            style={{ fontFamily: "Comfortaa", fontSize: "21px" }}>
+          <Typography style={{ fontFamily: "Acme", fontSize: "21px" }}>
             {e}
           </Typography>
         </ListItem>
@@ -97,19 +104,22 @@ export default function Subjects() {
   };
   return (
     <>
-      <div>
+      <Box sx={{ backgroundColor: "#413543"}} position={'fixed'} width={'315px'} height={'1070px'}>
         <CheckUser />
-
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
         >
-          <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-            <Typography style={{ fontFamily: "Comfortaa", fontSize: "25px" }}>
+          <AccordionSummary
+            sx={{ backgroundColor: "#865DFF" }}
+            aria-controls="panel1d-content"
+            id="panel1d-header"
+          >
+            <Typography style={{ fontFamily: "Acme", fontSize: "25px" }}>
               Text
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ backgroundColor: "#C9A7EB" }}>
             <List sx={style} component="nav" aria-label="mailbox folders">
               <CreateListItem type={sentences} />
             </List>
@@ -119,21 +129,51 @@ export default function Subjects() {
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
         >
-          <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+          <AccordionSummary
+            sx={{ backgroundColor: "#865DFF" }}
+            aria-controls="panel1d-content"
+            id="panel1d-header"
+          >
             <Typography
-              style={{ fontFamily: "Comfortaa", fontSize: "25px" }}
+              style={{ fontFamily: "Acme", fontSize: "25px" }}
               className="headingItem"
             >
               Video
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ backgroundColor: "#C9A7EB" }}>
             <List sx={style} component="nav" aria-label="mailbox folders">
               <CreateListItem type={clip} />
             </List>
           </AccordionDetails>
         </Accordion>
-      </div>
+        <Box sx={{ width: "316px", bgcolor: "#F9F5E7"}} id="favouriteList">
+          <nav aria-label="main mailbox folders">
+            <List>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ThemeProvider theme={newThme}>
+                    <ListItemIcon>
+                    <Badge
+                      color={'primary'}
+                      badgeContent={1}
+                    >
+                      <FavoriteIcon
+                        sx={{ color: '#E21818' }}
+                        fontSize="large"
+                      />
+                    </Badge>
+                     </ListItemIcon>
+                    <Typography color="black" fontSize={25}>
+                      Favourite
+                    </Typography>
+                  </ThemeProvider>
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </nav>
+        </Box>
+      </Box>
     </>
   );
 }
