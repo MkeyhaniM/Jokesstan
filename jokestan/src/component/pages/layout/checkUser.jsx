@@ -26,22 +26,22 @@ export default function CheckUser() {
       <div
         style={{
           display: "flex",
-          direction:"row",
-          justifyContent: "center",
+          direction: "row",
+          justifyContent: "start",
           alignItems: "center",
           padding: "30px",
+          color: "#F9F5E7",
         }}
       >
         <AccountCircleIcon fontSize="large" />
         <Typography
           display={"inline-block"}
-          style={{ fontFamily: "Comfortaa", fontSize: "25px" }}
+          style={{ fontFamily: "Acme", fontSize: "25px" }}
           variant="h4"
           component="h2"
         >
           Guest
         </Typography>
-        ;
       </div>
     );
   }
