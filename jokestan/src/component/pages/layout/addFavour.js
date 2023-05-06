@@ -1,3 +1,4 @@
-export default function addFavour(s,t) {
-  console.log(s,t);
+export default function addFavour(s, t, k) {
+  var ListFavour = [];
+  ListFavour.push({ sentenc: s, type: t, idSentenc: k });
 }
