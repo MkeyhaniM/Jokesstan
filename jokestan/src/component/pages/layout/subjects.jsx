@@ -69,12 +69,13 @@ const sentences = [
   "All",
   "Funny",
   "Depressed",
-  "Did you know",
+  "DidYouKnow",
   "News",
   "Poem",
   "Historical",
   "Story",
 ];
+
 const clip = [
   "All",
   "Funny",
@@ -84,7 +85,7 @@ const clip = [
   "Cooking",
 ];
 
-export default function Subjects() {
+export default function Subjects({ c, g }) {
   const [expanded, setExpanded] = React.useState("panel1");
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -94,7 +95,7 @@ export default function Subjects() {
   const CreateListItem = ({ type }) => {
     return type.map((e, index) => {
       return (
-        <ListItem key={`${e}-${index}`} button>
+        <ListItem onClick={() => g(e)} key={`${e}-${index}`} button>
           <Typography style={{ fontFamily: "Acme", fontSize: "21px" }}>
             {e}
           </Typography>
@@ -104,7 +105,12 @@ export default function Subjects() {
   };
   return (
     <>
-      <Box sx={{ backgroundColor: "#413543"}} position={'fixed'} width={'315px'} height={'1070px'}>
+      <Box
+        sx={{ backgroundColor: "#413543" }}
+        position={"fixed"}
+        width={"315px"}
+        height={"1070px"}
+      >
         <CheckUser />
         <Accordion
           expanded={expanded === "panel1"}
@@ -120,7 +126,11 @@ export default function Subjects() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ backgroundColor: "#C9A7EB" }}>
-            <List sx={style} component="nav" aria-label="mailbox folders">
+            <List
+              sx={style}
+              component="nav"
+              aria-label="mailbox folders"
+            >
               <CreateListItem type={sentences} />
             </List>
           </AccordionDetails>
@@ -147,23 +157,20 @@ export default function Subjects() {
             </List>
           </AccordionDetails>
         </Accordion>
-        <Box sx={{ width: "316px", bgcolor: "#F9F5E7"}} id="favouriteList">
+        <Box sx={{ width: "316px", bgcolor: "#F9F5E7" }} id="favouriteList">
           <nav aria-label="main mailbox folders">
             <List>
               <ListItem disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={(e) => c(e)}>
                   <ThemeProvider theme={newThme}>
                     <ListItemIcon>
-                    <Badge
-                      color={'primary'}
-                      badgeContent={1}
-                    >
-                      <FavoriteIcon
-                        sx={{ color: '#E21818' }}
-                        fontSize="large"
-                      />
-                    </Badge>
-                     </ListItemIcon>
+                      <Badge color={"primary"} badgeContent={1}>
+                        <FavoriteIcon
+                          sx={{ color: "#E21818" }}
+                          fontSize="large"
+                        />
+                      </Badge>
+                    </ListItemIcon>
                     <Typography color="black" fontSize={25}>
                       Favourite
                     </Typography>
