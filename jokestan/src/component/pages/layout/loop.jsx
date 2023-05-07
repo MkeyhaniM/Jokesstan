@@ -5,17 +5,25 @@ import request from "../../ax-jok/Ax-jokestan";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import requestNews from "../../ax-jok/Ax-news";
+import NewsRticles from "./newsRticles";
 
 export default function Loop({ subject }) {
   const [state, setState] = useState(false);
   const [data, setData] = useState(null);
   const [lastSub, setLastSub] = useState(null);
+  const [news, setNews] = useState();
+
+  requestNews().then((req) => {
+    setNews(req.data.articles);
+  });
 
   request()
     .then((req) => {
       if (!state) {
         setState(true);
         setData(req);
+        return req;
       }
     })
     .catch((error) => {
@@ -39,22 +47,31 @@ export default function Loop({ subject }) {
     }
   }
 
-  async function ChangeSub({ value }) {
-    console.log("Test 2");
-    console.log(await data);
-    if (value !== null) {
-      return <h1>hi</h1>;
-      // setState(false);
-      // return data[value].map((item, index) => {
-      //   return (
-      //     <CreateRticles
-      //       sentence={item}
-      //       key={index + value}
-      //       idSen={`sen_${index}`}
-      //       type={value}
-      //     />
-      //   );
-      // });
+  function ChangeSub({ value }) {
+    if (value !== null && data) {
+      if ((value = "News")) {
+        return news.map((e) => {
+          return (
+            <NewsRticles
+              title={e.title}
+              content={e.content}
+              url={e.url}
+              time={e.publishedAt}
+            />
+          );
+        });
+      } else {
+        return data[value].map((item, index) => {
+          return (
+            <CreateRticles
+              sentence={item}
+              key={index + value}
+              idSen={`sen_${index}`}
+              type={value}
+            />
+          );
+        });
+      }
     }
   }
 
@@ -77,7 +94,6 @@ export default function Loop({ subject }) {
     <Container>
       {data === null && <Loading />}
       {lastSub ? <ChangeSub value={lastSub} /> : <HandelSentence />}
-      {/* <HandelSentence /> */}
     </Container>
   );
 }
