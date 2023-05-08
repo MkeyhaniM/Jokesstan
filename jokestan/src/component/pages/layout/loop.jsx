@@ -5,18 +5,12 @@ import request from "../../ax-jok/Ax-jokestan";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import requestNews from "../../ax-jok/Ax-news";
 import NewsRticles from "./newsRticles";
 
 export default function Loop({ subject }) {
   const [state, setState] = useState(false);
   const [data, setData] = useState(null);
   const [lastSub, setLastSub] = useState(null);
-  const [news, setNews] = useState();
-
-  requestNews().then((req) => {
-    setNews(req.data.articles);
-  });
 
   request()
     .then((req) => {
@@ -49,18 +43,9 @@ export default function Loop({ subject }) {
 
   function ChangeSub({ value }) {
     if (value !== null && data) {
-      if ((value = "News")) {
-        return news.map((e) => {
-          return (
-            <NewsRticles
-              title={e.title}
-              content={e.content}
-              url={e.url}
-              time={e.publishedAt}
-            />
-          );
-        });
-      } else {
+      if (value === "News") {
+        return <NewsRticles GETONE={[]} />;
+      } else if (value !== "News" && value !== "All") {
         return data[value].map((item, index) => {
           return (
             <CreateRticles
@@ -71,8 +56,11 @@ export default function Loop({ subject }) {
             />
           );
         });
-      }
+      } else if (value === 'All')
+      return (<HandelSentence/>)
+      
     }
+
   }
 
   useEffect(() => {

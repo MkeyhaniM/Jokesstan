@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
@@ -11,6 +11,8 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import requestNews from "../../ax-jok/Ax-news";
+import { RotatingSquare } from "react-loader-spinner";
 
 const useStyle = makeStyles({
   buttonOptions: {
@@ -31,85 +33,102 @@ const theme2 = createTheme({
   },
 });
 
-export default function NewsRticles({title,content,url,time}) {
+export default function NewsRticles({GETONE}) {
+  const [news, setNews] = useState(false);
   const classes = useStyle();
-  return (
-    <Box
-      sx={{
-        "& > :not(style)": { m: 1 },
-        maxWidth: 900,
-        border: 2,
-        borderColor: "#E384FF",
-        boxShadow: "4px 4px 10px 0 #FFA3FD",
-        borderRadius: 3,
-        margin: "5rem auto",
-      }}
-    >
-      <Box>
-        <Box className={classes.buttonOptions}>
-          <ThemeProvider theme={theme}>
-            <Typography color={"snow"} variant="h2" fontSize={20} align="left">
-              {title}
-            </Typography>
-            <Typography color={"snow"} variant="h4" fontSize={20} align="left">
-              {content}
-              <a href={url}>For more information</a>
-            </Typography>
-            <Typography color={"snow"} variant="h5" fontSize={20} align="left">
-              {time}
-            </Typography>
-          </ThemeProvider>
-        </Box>
-        <Box
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"space-around"}
-        >
-          <Box display={"flex"}>
-            <Box marginX={1}>
-              <ThemeProvider theme={theme2}>
-                <Fab aria-label="like" variant="extended" color="default">
-                  <FavoriteIcon
-                    sx={{ mr: 1 }}
-                    fontSize="medium"
-                    color="error"
-                  />
-                  Favorite
-                </Fab>
+
+  useEffect(() => {
+    requestNews()
+      .then((req) => {
+        setNews(req.data.articles);
+      })
+      .catch((handel) => handel);
+  }, [GETONE]);
+
+  function GetNews() {
+    console.log(news);
+    if (news) {
+      return news.map((e, index) => {
+        return (
+          <Box
+            key={"newsOf"+index}
+            sx={{
+              "& > :not(style)": { m: 1 },
+              maxWidth: 900,
+              border: 2,
+              borderColor: "#E384FF",
+              boxShadow: "4px 4px 10px 0 #FFA3FD",
+              borderRadius: 3,
+              margin: "5rem auto",
+            }}
+          >
+            <Box className={classes.buttonOptions}>
+              <ThemeProvider theme={theme}>
+                <Typography
+                  color={"snow"}
+                  fontSize={25}
+                  align="center"
+                >
+                  {e.title}
+                </Typography>
+                <Typography
+                  color={"white"}
+                  fontSize={16}
+                  align="left"
+                >
+                  {e.content}
+                  <a href={e.url}>For more information</a>
+                </Typography>
+                <Typography
+                  color={"snow"}
+                  variant="h5"
+                  fontSize={20}
+                  align="left"
+                >
+                  {e.time}
+                </Typography>
               </ThemeProvider>
             </Box>
-            <Box marginX={1}>
-              <ThemeProvider theme={theme2}>
-                <Fab aria-label="like" variant="extended" color="default">
-                  <ContentCopyRounded
-                    sx={{ mr: 1 }}
-                    fontSize="medium"
-                    color="info"
+            <Box
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"space-around"}
+            >
+              <Box alignItems={"end"}>
+                <Stack direction="row" spacing={1} marginY={2}>
+                  <Chip
+                    icon={<FormatQuoteIcon />}
+                    color="primary"
+                    variant="filled"
+                    label="News"
                   />
-                  Copy
-                </Fab>
-              </ThemeProvider>
-            </Box>
-            <Box marginX={1}>
-              <ThemeProvider theme={theme2}>
-                <Fab aria-label="like" variant="extended" color="default">
-                  <CopyRate sx={{ mr: 1 }} fontSize="medium" color="warning" />
-                  Rate
-                </Fab>
-              </ThemeProvider>
+                </Stack>
+              </Box>
             </Box>
           </Box>
-          <Box alignItems={"end"}>
-            <Stack direction="row" spacing={1} marginY={2}>
-              <Chip
-                icon={<FormatQuoteIcon />}
-                color="primary"
-                variant="filled"
-              />
-            </Stack>
-          </Box>
-        </Box>
+        );
+      });
+    }
+  }
+
+  function LoaderOfNewsPage() {
+    return (
+      <Box paddingLeft={5}>
+        <RotatingSquare
+          height="180"
+          width="180"
+          color="#4fa94d"
+          ariaLabel="triangle-loading"
+          wrapperStyle={{marginLeft:'450px'}}
+          wrapperClassName=""
+          visible={true}
+        />
+        <Typography fontSize={23} color={''}>
+          Please a wait  
+        </Typography>
       </Box>
-    </Box>
-  );
+    );
+  }
+
+  return <>{news ? <GetNews /> : <LoaderOfNewsPage />}</>;
 }
