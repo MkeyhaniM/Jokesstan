@@ -11,7 +11,7 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import addFavour from "./addFavour";
+import { addFavour } from "./addFavour";
 
 const useStyle = makeStyles({
   buttonOptions: {
@@ -32,7 +32,7 @@ const theme2 = createTheme({
   },
 });
 
-export default function CreateRticles({sentence, type, idSen}) {
+export default function CreateRticles({ sentence, type, idSen }) {
   const classes = useStyle();
   return (
     <Box
