@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -15,7 +17,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Badge from "@mui/material/Badge";
-import { purple } from "@mui/material/colors";
+import { addFavour } from "./addFavour";
 
 const newThme = createTheme({
   typography: {
@@ -92,6 +94,12 @@ export default function Subjects({ c, g }) {
     setExpanded(newExpanded ? panel : false);
   };
 
+  // const [lengthOfListFavour, setlengthOfListFavour] = useState(0);
+
+  // useEffect(() => {
+  //   setlengthOfListFavour(addFavour().length);
+  // }, [addFavour]);
+
   const CreateListItem = ({ type }) => {
     return type.map((e, index) => {
       return (
@@ -103,6 +111,7 @@ export default function Subjects({ c, g }) {
       );
     });
   };
+
   return (
     <>
       <Box
@@ -126,11 +135,7 @@ export default function Subjects({ c, g }) {
             </Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ backgroundColor: "#C9A7EB" }}>
-            <List
-              sx={style}
-              component="nav"
-              aria-label="mailbox folders"
-            >
+            <List sx={style} component="nav" aria-label="mailbox folders">
               <CreateListItem type={sentences} />
             </List>
           </AccordionDetails>
@@ -164,7 +169,10 @@ export default function Subjects({ c, g }) {
                 <ListItemButton onClick={(e) => c(e)}>
                   <ThemeProvider theme={newThme}>
                     <ListItemIcon>
-                      <Badge color={"primary"} badgeContent={1}>
+                      <Badge
+                        color={"primary"}
+                        badgeContent={0}
+                      >
                         <FavoriteIcon
                           sx={{ color: "#E21818" }}
                           fontSize="large"
