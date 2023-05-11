@@ -12,6 +12,7 @@ import Stack from "@mui/material/Stack";
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { addFavour } from "./addFavour";
+import { Copy } from "../copySentense/copy";
 
 const useStyle = makeStyles({
   buttonOptions: {
@@ -80,7 +81,12 @@ export default function CreateRticles({ sentence, type, idSen }) {
             </Box>
             <Box marginX={1}>
               <ThemeProvider theme={theme2}>
-                <Fab aria-label="like" variant="extended" color="default">
+                <Fab
+                  aria-label="like"
+                  variant="extended"
+                  color="default"
+                  onClick={(e) => Copy(sentence)}
+                >
                   <ContentCopyRounded
                     sx={{ mr: 1 }}
                     fontSize="medium"
