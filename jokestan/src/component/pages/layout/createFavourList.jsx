@@ -1,10 +1,6 @@
 import React from "react";
 
 import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ContentCopyRounded from "@mui/icons-material/ContentCopyRounded";
-import CopyRate from "@mui/icons-material/StarRateRounded";
 import Typography from "@mui/material/Typography";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import Chip from "@mui/material/Chip";
@@ -22,13 +18,6 @@ const useStyle = makeStyles({
 const theme = createTheme({
   typography: {
     fontFamily: ["Ubuntu", "serif"].join(","),
-  },
-});
-
-const theme2 = createTheme({
-  typography: {
-    fontFamily: ["Acme", "serif"].join(","),
-    fontSize: 17,
   },
 });
 
