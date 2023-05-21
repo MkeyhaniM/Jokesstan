@@ -1,4 +1,3 @@
-import {purple} from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import Box from '@mui/material/Box';
 import * as React from "react";
