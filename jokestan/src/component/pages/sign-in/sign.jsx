@@ -6,13 +6,31 @@ import Grid from "@mui/material/Grid";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 
+import { request } from "./request";
+import { useState, useEffect } from "react";
+import CustomizedSnackbars from "./NotTrueNumber";
+
 export function Sign() {
-  const getJokestan = () => {
-    const getUsername = document.querySelector("#userValue");
-    const getGmail = document.querySelector("#gmailValue");
-    const getNumber = document.querySelector("#numberValue");
-    console.log(getUsername.value,getGmail.value,getNumber.value);
-  };
+  const [checkConditionOfNumber, setCheckConditionOfNumber] = useState(false);
+
+  function getSign() {
+    var getUsername = document.getElementById("userValue");
+    var getGmail = document.getElementById("gmailValue");
+    var getNumber = document.getElementById("numberValue");
+
+    request(getUsername, getGmail, getNumber);
+
+    // if (sign) {
+    //   setCheckConditionOfNumber(true);
+    // } else {
+    //   setCheckConditionOfNumber((e) => e + 1);
+    // }
+  }
+
+  // useEffect(() => {
+  //   if (typeof checkConditionOfNumber === Number) {
+  //   }
+  // }, [checkConditionOfNumber]);
 
   return (
     <Container>
@@ -56,7 +74,7 @@ export function Sign() {
               aria-label="Disabled elevation buttons"
               size="large"
             >
-              <Button onClick={() => getJokestan()} color="success">
+              <Button onClick={() => getSign()} color="success">
                 Sgin
               </Button>
               <Button color="secondary">Skip</Button>
@@ -64,6 +82,7 @@ export function Sign() {
           </Grid>
         </Grid>
       </Box>
+      {/* <CustomizedSnackbars /> */}
     </Container>
   );
 }
