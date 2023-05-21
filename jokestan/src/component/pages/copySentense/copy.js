@@ -1,5 +1,3 @@
-import * as React from "react";
-
 export const Copy = async (e) => {
   var value = e;
 
