@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Typography } from "@mui/material";
+import { getSetUser } from "../sign-in/setUserInheading";
 
 export default function CheckUser() {
   const [User, setUser] = useState(false);
+  useEffect(() => {
+    setUser(getSetUser());
+  }, [getSetUser]);
 
   function ShowingUser() {
     return (
@@ -46,5 +50,7 @@ export default function CheckUser() {
     );
   }
 
-  return <>{User ? <ShowingUser /> : <ShowingGuest />}</>;
+  return <>
+  {User ? <ShowingUser /> : <ShowingGuest />}
+  </>;
 }
