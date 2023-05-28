@@ -9,11 +9,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function CustomizedSnackbars() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
+  const [open, setOpen] = React.useState(true);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -24,16 +20,13 @@ export default function CustomizedSnackbars() {
 
   
   return (
-    <Stack spacing={2} sx={{ width: "100%" }}>
-      <Button variant="outlined" onClick={handleClick}>
-        Open success snackbar
-      </Button>
+    <Stack marginY={4} spacing={2} sx={{ width: "100%" }}>
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           The number selected is not correct
         </Alert>
       </Snackbar>
-      <Alert severity="error">The number selected is not correct</Alert>
+      <Alert severity="error">One of inputes is blank , please enter your information</Alert>
     </Stack>
   );
 }
