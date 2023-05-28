@@ -5,6 +5,6 @@ import axios from "axios";
 export async function AxSign(userInformation) {
   return axios
     .post("http://localhost:3030/post", { userInformation })
-    .then((res) => console.log(res.data))
-    .catch((err) => console.log(err));
+    .then((res) => res.data)
+    .catch((err) => alert(err));
 }
