@@ -9,28 +9,49 @@ import Button from "@mui/material/Button";
 import { request } from "./request";
 import { useState, useEffect } from "react";
 import CustomizedSnackbars from "./NotTrueNumber";
+import { getSetUser } from "./setUserInheading";
+import { Link } from "react-router-dom";
 
 export function Sign() {
   const [checkConditionOfNumber, setCheckConditionOfNumber] = useState(false);
+  const [blankInput, setBlankInput] = useState(false);
+  const [dataApi, setDataApi] = useState();
+
+  const linkStyle = {
+    textDecoration: "none",
+    color: "white",
+  };
 
   function getSign() {
     var getUsername = document.getElementById("userValue");
     var getGmail = document.getElementById("gmailValue");
     var getNumber = document.getElementById("numberValue");
-
-    request(getUsername, getGmail, getNumber);
-
-    // if (sign) {
-    //   setCheckConditionOfNumber(true);
-    // } else {
-    //   setCheckConditionOfNumber((e) => e + 1);
-    // }
+    
+    if (
+      getGmail.value !== "" &&
+      getUsername.value !== "" &&
+      getNumber.value !== ""
+    ) {
+      request(getUsername, getGmail, getNumber)
+        .then(({ success, data }) => {
+          if (success) {
+            setDataApi(data.user);
+          }
+        })
+        .catch((e) => {
+          throw Error("The request has a problem" + "   >>>" + e);
+        });
+    
+      } else {
+      setBlankInput(true);
+    }
   }
 
-  // useEffect(() => {
-  //   if (typeof checkConditionOfNumber === Number) {
-  //   }
-  // }, [checkConditionOfNumber]);
+  useEffect(() => {
+    if (dataApi) {
+      getSetUser(dataApi);
+    }
+  }, [dataApi]);
 
   return (
     <Container>
@@ -74,15 +95,21 @@ export function Sign() {
               aria-label="Disabled elevation buttons"
               size="large"
             >
-              <Button onClick={() => getSign()} color="success">
-                Sgin
+              <Button color="success">
+                <Link to="/start" style={linkStyle}>
+                  Sign
+                </Link>
               </Button>
-              <Button color="secondary">Skip</Button>
+              <Button color="secondary">
+                <Link to="/start" style={linkStyle}>
+                  Skip
+                </Link>
+              </Button>
             </ButtonGroup>
           </Grid>
         </Grid>
       </Box>
-      {/* <CustomizedSnackbars /> */}
+      {blankInput && <CustomizedSnackbars />}
     </Container>
   );
 }
