@@ -11,9 +11,7 @@ export function request(user, gmail, number) {
     number: number.value,
   };
 
-  AxSign(information)
-    .then((re) => console.log(re))
-    .catch((e) => {
-      console.log(e);
-    });
+  return AxSign(information)
+    .then((re) => re)
+    .catch((e) => e);
 }
