@@ -9,11 +9,10 @@ import Button from "@mui/material/Button";
 import { request } from "./request";
 import { useState, useEffect } from "react";
 import CustomizedSnackbars from "./NotTrueNumber";
-import { getSetUser } from "./setUserInheading";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getToken } from "../layout/checkUser";
 
 export function Sign() {
-  const [checkConditionOfNumber, setCheckConditionOfNumber] = useState(false);
   const [blankInput, setBlankInput] = useState(false);
   const [dataApi, setDataApi] = useState();
 
@@ -22,11 +21,12 @@ export function Sign() {
     color: "white",
   };
 
+  const navigate = useNavigate();
   function getSign() {
     var getUsername = document.getElementById("userValue");
     var getGmail = document.getElementById("gmailValue");
     var getNumber = document.getElementById("numberValue");
-    
+
     if (
       getGmail.value !== "" &&
       getUsername.value !== "" &&
@@ -41,15 +41,16 @@ export function Sign() {
         .catch((e) => {
           throw Error("The request has a problem" + "   >>>" + e);
         });
-    
-      } else {
+    } else {
       setBlankInput(true);
     }
   }
 
+  
   useEffect(() => {
     if (dataApi) {
-      getSetUser(dataApi);
+      navigate("/start", { replace: true, state: { bookName: "Fake Title" } });
+      getToken(dataApi);
     }
   }, [dataApi]);
 
@@ -95,11 +96,11 @@ export function Sign() {
               aria-label="Disabled elevation buttons"
               size="large"
             >
-              <Button color="success">
-                <Link to="/start" style={linkStyle}>
-                  Sign
-                </Link>
+              {/* <Link to="/start" style={linkStyle}  > */}
+              <Button color="success" onClick={() => getSign()}>
+                Sign
               </Button>
+              {/* </Link> */}
               <Button color="secondary">
                 <Link to="/start" style={linkStyle}>
                   Skip
