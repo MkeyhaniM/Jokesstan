@@ -19,10 +19,14 @@ h3
     </ul>
 </div>
 
-<h2>for get started <br> You have to run some scripts(package.json)</h2>
-<h2>### `npm start`</h2>
-<h2>### `npm run server`</h2>
-<h2>### `npm run jsonSentence`</h2>
+<h2>for get started <br> You have to run some scripts(package.json) </h2>
+
+### `npm start`
+
+### `npm run server`
+
+### `npm run jsonSentence`
+
 <h2>In that case it is going to <mark>work</mark></h2>
 
 <div>
