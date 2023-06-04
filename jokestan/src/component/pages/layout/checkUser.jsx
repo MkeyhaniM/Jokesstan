@@ -5,22 +5,44 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Typography } from "@mui/material";
-import { getSetUser } from "../sign-in/setUserInheading";
+
+var myToken;
+
+export function getToken(e) {
+  myToken = e;
+}
 
 export default function CheckUser() {
   const [User, setUser] = useState(false);
+
   useEffect(() => {
-    setUser(getSetUser());
-  }, [getSetUser]);
+    if (myToken) {
+      console.log(myToken);
+      setUser(myToken);
+    }
+  }, [myToken]);
 
   function ShowingUser() {
     return (
-      <div style={{ display: "flex", padding: "20px" }}>
-        <AccountCircleIcon size />
-        <Typography display={"inline-block"} variant="h4" component="h2">
+      <div
+        style={{
+          display: "flex",
+          direction: "row",
+          justifyContent: "start",
+          alignItems: "center",
+          padding: "30px",
+          color: "#F9F5E7",
+        }}
+      >
+        <AccountCircleIcon />
+        <Typography
+          display={"inline-block"}
+          style={{ fontFamily: "Acme", fontSize: "25px" }}
+          variant="h4"
+          component="h2"
+        >
           {User}
         </Typography>
-        ;
       </div>
     );
   }
@@ -50,7 +72,5 @@ export default function CheckUser() {
     );
   }
 
-  return <>
-  {User ? <ShowingUser /> : <ShowingGuest />}
-  </>;
+  return <>{User ? <ShowingUser /> : <ShowingGuest />}</>;
 }
